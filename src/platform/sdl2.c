@@ -31,7 +31,7 @@ SDL_Texture *sdlTexture;
 SDL_sem *vBlankSemaphore;
 SDL_atomic_t isFrameAvailable;
 bool speedUp = false;
-unsigned int videoScale = 1;
+unsigned int videoScale = 3;
 bool videoScaleChanged = false;
 bool isRunning = true;
 bool paused = false;
