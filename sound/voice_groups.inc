@@ -189,7 +189,7 @@
 .include "sound/voicegroups/voicegroup188.inc"
 .include "sound/voicegroups/voicegroup189.inc"
 .include "sound/voicegroups/voicegroup190.inc"
-.include "sound/voicegroups/voicegroup191.inc" @ DPPt main
+.include "sound/voicegroups/voicegroup191.inc" /* DPPt main */
 .include "sound/voicegroups/voicegroup192.inc"
 .include "sound/voicegroups/voicegroup193.inc"
 .include "sound/voicegroups/voicegroup194.inc"
@@ -227,7 +227,7 @@
 .include "sound/voicegroups/voicegroup226.inc"
 .include "sound/voicegroups/voicegroup227.inc"
 .include "sound/voicegroups/voicegroup228.inc"
-.include "sound/voicegroups/voicegroup229.inc" @ HGSS main
+.include "sound/voicegroups/voicegroup229.inc" /* HGSS main */
 .include "sound/voicegroups/voicegroup230.inc"
 .include "sound/voicegroups/voicegroup231.inc"
 .include "sound/voicegroups/voicegroup232.inc"

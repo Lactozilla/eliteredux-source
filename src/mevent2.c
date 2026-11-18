@@ -399,6 +399,7 @@ bool32 MysteryGift_TrySaveStamp(const u16 *data)
 
 void MysteryGift_LoadLinkGameData(struct MysteryGiftLinkGameData *data, bool32 a1)
 {
+#ifndef PORTABLE
     #ifndef FREE_MYSTERY_EVENT_BUFFERS
     int i;
     CpuFill32(0, data, sizeof(struct MysteryGiftLinkGameData));
@@ -439,6 +440,7 @@ void MysteryGift_LoadLinkGameData(struct MysteryGiftLinkGameData *data, bool32 a
     memcpy(data->unk_5C, RomHeaderGameCode, 4);
     data->unk_60 = RomHeaderSoftwareVersion;
     #endif
+#endif
 }
 
 bool32 MysteryGift_ValidateLinkGameData(const struct MysteryGiftLinkGameData *data, bool32 a1)

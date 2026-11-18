@@ -13,7 +13,7 @@
 	.global	se_m_reflect
 	.align	2
 
-@********************** Track  1 **********************@
+/* ********************** Track  1 **********************@ */
 
 se_m_reflect_1:
 	.byte	KEYSH , se_m_reflect_key+0
@@ -174,7 +174,7 @@ se_m_reflect_1:
 	.byte	W06
 	.byte	FINE
 
-@********************** Track  2 **********************@
+/* ********************** Track  2 **********************@ */
 
 se_m_reflect_2:
 	.byte	KEYSH , se_m_reflect_key+0
@@ -207,7 +207,7 @@ se_m_reflect_2_000:
 	.byte	W02
 	.byte	PEND
 	.byte	PATT
-	 .word	se_m_reflect_2_000
+	 .4byte	se_m_reflect_2_000
 	.byte		VOL   , 60*se_m_reflect_mvl/mxv
 	.byte	W01
 	.byte		        20*se_m_reflect_mvl/mxv
@@ -250,18 +250,18 @@ se_m_reflect_2_000:
 	.byte	W05
 	.byte	FINE
 
-@******************************************************@
+/* ******************************************************@ */
 	.align	2
 
 se_m_reflect:
-	.byte	2	@ NumTrks
-	.byte	0	@ NumBlks
-	.byte	se_m_reflect_pri	@ Priority
-	.byte	se_m_reflect_rev	@ Reverb.
+	.byte	2	/* NumTrks */
+	.byte	0	/* NumBlks */
+	.byte	se_m_reflect_pri	/* Priority */
+	.byte	se_m_reflect_rev	/* Reverb. */
 
-	.word	se_m_reflect_grp
+	.4byte	se_m_reflect_grp
 
-	.word	se_m_reflect_1
-	.word	se_m_reflect_2
+	.4byte	se_m_reflect_1
+	.4byte	se_m_reflect_2
 
 	.end

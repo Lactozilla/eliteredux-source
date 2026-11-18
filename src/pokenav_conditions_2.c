@@ -22,7 +22,7 @@ u32 LoopedTask_SlideMonOut(s32);
 u32 LoopedTask_OpenMonMarkingsWindow(s32);
 u32 LoopedTask_CloseMonMarkingsWindow(s32);
 
-BSS_DATA u8 gUnknown_030012BC;
+u8 gUnknown_030012BC;
 
 const u16 gConditionGraphData_Pal[] = INCBIN_U16("graphics/pokenav/condition/graph_data.gbapal");
 const u16 gConditionText_Pal[] = INCBIN_U16("graphics/pokenav/condition/text.gbapal");

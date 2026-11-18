@@ -720,7 +720,7 @@
 	.4byte \ptr
 	.endm
 
-@ useful script macros
+/* useful script macros */
 	.macro if_has_physical_move battler:req, ptr:req
 	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr
 	.endm

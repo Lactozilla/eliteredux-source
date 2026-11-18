@@ -1,4 +1,4 @@
-@ commands
+/* commands */
 
 	.macro loadspritegfx tag:req
 	.byte 0x0
@@ -271,7 +271,7 @@
 	.byte 0x2f
 	.endm
 	
-@ useful macros
+/* useful macros */
 	.macro jumpreteq value:req, ptr:req
 	jumpargeq ARG_RET_ID, \value, \ptr
 	.endm
@@ -289,10 +289,10 @@
 	jumprettrue \ptr
 	.endm
     
-@ keep CFRU macros cause I'm lazy. todo: update to createsprite and createvisualtask, respectively
+/* keep CFRU macros cause I'm lazy. todo: update to createsprite and createvisualtask, respectively */
 .macro launchtemplate launchtemplatePtr launchtemplatePriority launchtemplateArgsNo launchtemplatearg0 launchtemplatearg1 launchtemplatearg2 launchtemplatearg3 launchtemplatearg4 launchtemplatearg5 launchtemplatearg6 launchtemplatearg7 launchtemplatearg8
     .byte 0x2
-    .word \launchtemplatePtr
+    .4byte \launchtemplatePtr
     .byte \launchtemplatePriority
     .byte \launchtemplateArgsNo
     .hword \launchtemplatearg0
@@ -308,7 +308,7 @@
     
 .macro launchtask launchtaskPtr launchtaskPriority launchtaskArgsNo launchtaskarg0 launchtaskarg1 launchtaskarg2 launchtaskarg3 launchtaskarg4 launchtaskarg5 launchtaskarg6 launchtaskarg7 launchtaskarg8
     .byte 0x3
-    .word \launchtaskPtr
+    .4byte \launchtaskPtr
     .byte \launchtaskPriority
     .byte \launchtaskArgsNo
     .hword \launchtaskarg0
@@ -327,7 +327,7 @@
 	.hword \setblends_value
 	.endm
 
-	@ same as createvisualtask except takes in battlerargindex, which is the battle anim arg index of the battler to loop through
+	/* same as createvisualtask except takes in battlerargindex, which is the battle anim arg index of the battler to loop through */
 .macro createvisualtaskontargets addr:req, priority:req, battlerargindex:req, argv:vararg
 	.byte 0x30
 	.4byte \addr
@@ -339,7 +339,7 @@
 .Lcreatetask_\@_2:
 	.endm
 
-	@ same as createsprite except takes in battlerargindex, which is the battle anim arg index of the battler to loop through
+	/* same as createsprite except takes in battlerargindex, which is the battle anim arg index of the battler to loop through */
 .macro createspriteontargets template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
 	.byte 0x31
 	.4byte \template
@@ -355,7 +355,7 @@
 .Lsprite_\@_2:
 	.endm
 
-	@ does not overwrite gBattleAnimArgs[battlerargindex], some sprite templates are too dependent on the value (e.g. heal block)
+	/* does not overwrite gBattleAnimArgs[battlerargindex], some sprite templates are too dependent on the value (e.g. heal block) */
 .macro createspriteontargets_onpos template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
 	.byte 0x32
 	.4byte \template

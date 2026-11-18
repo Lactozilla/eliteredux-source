@@ -1,4 +1,5 @@
 	.include "asm/macros/asm.inc"
+	.include "asm/macros/bit_width.inc"
 	.include "asm/macros/function.inc"
 	.include "asm/macros/movement.inc"
 	.include "asm/macros/window.inc"
@@ -51,7 +52,7 @@
 	.4byte \address
 	.endm
 
-@ For object animation frames.
+/* For object animation frames. */
 	.macro obj_frame_tiles address, uncompressed_size
 	.4byte \address
 	.2byte \uncompressed_size
@@ -68,9 +69,9 @@
 	.4byte \callback
 	.endm
 
-@ Berry trees have a table defining the palette slot used for each of their 5
-@ stages. However, the first 2 stages always use the same slots regardless of
-@ the type of tree and the slots of the last 3 stages always equal each other.
+/* Berry trees have a table defining the palette slot used for each of their 5 */
+/* stages. However, the first 2 stages always use the same slots regardless of */
+/* the type of tree and the slots of the last 3 stages always equal each other. */
 	.macro berry_tree_palette_slot_table slot
 	.byte 3, 4, \slot, \slot, \slot
 	.endm

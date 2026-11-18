@@ -1,8 +1,16 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include <stdio.h>
 #include <string.h>
 #include <limits.h>
+
+#if !defined NO_STD_LIB_ENABLED && defined PORTABLE
+    #define DBGPRINTF(...) printf(__VA_ARGS__)
+#else
+    #define DBGPRINTF(...)
+#endif
+
 #include "config.h"  // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 #include "constants/global.h"
@@ -42,11 +50,19 @@
 
 #define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
 #define STATIC_ASSERT(condition, name) typedef char static_assertion_##name[2 * (condition) - 1];
+#ifdef PORTABLE
+// TEMPORARY to make pc_port compile
+#define ARRAY_COPY(to, from)                                   \
+    {                                                          \
+        memcpy(&to, &from, sizeof(to));                        \
+    }
+#else
 #define ARRAY_COPY(to, from)                                   \
     {                                                          \
         STATIC_ASSERT(sizeof(to) == sizeof(from), ARRAY_COPY); \
         memcpy(&to, &from, sizeof(to));                        \
     }
+#endif
 #define ZERO(arr) memset(&arr, 0, sizeof(arr));
 #define ARRAY_MODULO(array, index) (array)[(index) % ARRAY_COUNT(array)]
 #define STRUCT_COPY(to, from) ARRAY_COPY(to, from)

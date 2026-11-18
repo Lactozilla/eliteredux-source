@@ -1,7 +1,11 @@
 #ifndef GUARD_GBA_IO_REG_H
 #define GUARD_GBA_IO_REG_H
 
+#ifndef PORTABLE
 #define REG_BASE 0x4000000 // I/O register base address
+#else
+extern unsigned char REG_BASE[];
+#endif
 
 // I/O register offsets
 
@@ -482,6 +486,7 @@
 #define REG_SIODATA32   (*(vu32 *)REG_ADDR_SIODATA32)
 #define REG_SIOMLT_SEND (*(vu16 *)REG_ADDR_SIOMLT_SEND)
 #define REG_SIOMLT_RECV (*(vu64 *)REG_ADDR_SIOMLT_RECV)
+#define REG_SIOMULTI(n) (*(vu16 *)(REG_ADDR_SIOMULTI0 + (n) * 2))
 #define REG_SIOMULTI0   (*(vu16 *)REG_ADDR_SIOMULTI0)
 #define REG_SIOMULTI1   (*(vu16 *)REG_ADDR_SIOMULTI1)
 #define REG_SIOMULTI2   (*(vu16 *)REG_ADDR_SIOMULTI2)
@@ -643,9 +648,11 @@
 #define DMA_DEST_DEC      0x0020
 #define DMA_DEST_FIXED    0x0040
 #define DMA_DEST_RELOAD   0x0060
+#define DMA_DEST_MASK     0x0060
 #define DMA_SRC_INC       0x0000
 #define DMA_SRC_DEC       0x0080
 #define DMA_SRC_FIXED     0x0100
+#define DMA_SRC_MASK      0x0180
 #define DMA_REPEAT        0x0200
 #define DMA_16BIT         0x0000
 #define DMA_32BIT         0x0400

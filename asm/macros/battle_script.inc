@@ -1,4 +1,4 @@
-@ commands
+/* commands */
 	.macro attackcanceler
 	.byte 0x0
 	.endm
@@ -426,33 +426,33 @@
 	.byte \param1
 	.endm
 
-	@ Help macros for 5 uses of moveend command
+	/* Help macros for 5 uses of moveend command */
 
-	@ All cases
+	/* All cases */
 	.macro moveendall
 	setbyte sMOVEEND_STATE, 0
 	moveend 0, 0
 	.endm
 
-	@ Chosen case
+	/* Chosen case */
 	.macro moveendcase case:req
 	setbyte sMOVEEND_STATE, \case
 	moveend 1, 0
 	.endm
 
-	@ All cases from (inclusive)
+	/* All cases from (inclusive) */
 	.macro moveendfrom from:req
 	setbyte sMOVEEND_STATE, \from
 	moveend 0, 0
 	.endm
 
-	@ All cases from 0 to (not inclusive)
+	/* All cases from 0 to (not inclusive) */
 	.macro moveendto to:req
 	setbyte sMOVEEND_STATE, 0
 	moveend 2, \to
 	.endm
 
-	@ Cases from (inclusive) to (not inclusive)
+	/* Cases from (inclusive) to (not inclusive) */
 	.macro moveendfromto from:req, to:req
 	setbyte sMOVEEND_STATE, \from
 	moveend 2, \to
@@ -1331,7 +1331,7 @@
 	.4byte \ptr
 	.endm
 
-@ various command changed to more readable macros
+/* various command changed to more readable macros */
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
@@ -2019,7 +2019,7 @@
 	various BS_ATTACKER, VARIOUS_SET_WEATHER_GRAPHICS
 	.endm
 
-@ helpful macros
+/* helpful macros */
 	.macro setstatchanger stat:req, stages:req, down:req
 	various 0, VARIOUS_SET_ACTIVE_STAT_CHANGER
 	.byte \stat | \stages << 3 | \down << 7
@@ -2530,7 +2530,7 @@ checkprimalweather_winds_fail_\@:
 checkprimalweather_pass_\@:
 	.endm
 
-@ unused, was for an experiment
+/* unused, was for an experiment */
 .macro battlemacrostyped macro_type:req, type:req, data:req, ptr:req, data2
 	.if \param2 == BATTLE_MACROS_TYPE_U8
 		.byte 0x93
@@ -2551,7 +2551,7 @@ checkprimalweather_pass_\@:
 	.endif
 	.endm
 
-@ unused, was for an experiment
+/* unused, was for an experiment */
 .macro battlemacrosflexible4 macro_data_type:req, macro_type:req, data:req, data2=0, data3=0, data4=0
 	.byte 0x93
 	.byte \macro_data_type
@@ -2562,15 +2562,15 @@ checkprimalweather_pass_\@:
 	.byte \data4
 .endm
 
-@ taken from events.inc
-@ Blocks script execution until the currently-playing sound (triggered by playse) finishes playing.
+/* taken from events.inc */
+/* Blocks script execution until the currently-playing sound (triggered by playse) finishes playing. */
 .macro waitse
 	.byte 0x30
 .endm
 
-@ taken from events.inc
-@ Plays the specified (song_number) song. If save_song is TRUE, the
-@ specified (song_number) will be saved as if savebgm was called with it.
+/* taken from events.inc */
+/* Plays the specified (song_number) song. If save_song is TRUE, the */
+/* specified (song_number) will be saved as if savebgm was called with it. */
 .macro playbgm song_number:req, save_song:req
 	.byte 0x33
 	.2byte \song_number

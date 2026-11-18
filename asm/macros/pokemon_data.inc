@@ -42,7 +42,7 @@
 	.2byte 20000 + \species
 	.endm
 
-@ If the min level equals the max level, only one level argument is needed.
+/* If the min level equals the max level, only one level argument is needed. */
 	.macro wild_mon species, min_level, max_level
 	.byte \min_level
 

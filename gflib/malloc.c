@@ -3,7 +3,9 @@
 
 static void *sHeapStart;
 static u32 sHeapSize;
+#ifndef PORTABLE
 __attribute__((section("__EWRAM_HEAP"))) u8 gHeap[HEAP_SIZE] = {0};
+#endif
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-variable"
