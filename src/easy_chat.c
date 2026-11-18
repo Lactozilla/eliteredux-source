@@ -1525,6 +1525,11 @@ void ShowEasyChatScreen(void)
         return;
     }
 
+    if (words == NULL)
+    {
+        return;
+    }
+
     CleanupOverworldWindowsAndTilemaps();
     DoEasyChatScreen(gSpecialVar_0x8004, words, CB2_ReturnToFieldContinueScript, displayedPersonType);
 }
@@ -4195,7 +4200,11 @@ static void AdjustBgTilemapForFooter(void)
 static void DrawLowerWindow(void)
 {
     PutWindowTilemap(2);
+#ifdef PORTABLE
+    CopyWindowToVram(2, COPYWIN_FULL);
+#else
     CopyBgTilemapBufferToVram(2);
+#endif
 }
 
 static void InitLowerWindowText(u32 whichText)
@@ -5826,6 +5835,11 @@ void InitQuestionnaireWords(void)
 {
     int i;
     u16 *words = GetQuestionnaireWordsPtr();
+    if (words == NULL)
+    {
+        return;
+    }
+
     for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
         words[i] = EC_EMPTY_WORD;
 }
