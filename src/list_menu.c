@@ -1142,6 +1142,11 @@ u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 fi
 static void Task_ScrollIndicatorArrowPair(u8 taskId)
 {
     struct ScrollIndicatorPair *data = (void*) gTasks[taskId].data;
+    if (data->scrollOffset == NULL)
+    {
+        return;
+    }
+
     u16 currItem = (*data->scrollOffset);
 
     if (currItem == data->fullyUpThreshold && currItem != 0xFFFF)
