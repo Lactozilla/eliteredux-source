@@ -216,13 +216,13 @@ LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 else ifeq ($(PORTABLE),1)
 ROM := $(PORTABLE_ROM_NAME)
 OBJ_DIR := $(PORTABLE_OBJ_DIR_NAME)
-CPPFLAGS += -std=gnu23 -D NONMATCHING -D PORTABLE -D $(TARGET_PLATFORM) -D $(TILE_RENDERER) -D UBFIX $(CPPFLAGS64) $(PLATFORM_INCLUDES) -I$(SDL_DIR)/include -L$(SDL_DIR)/lib
+CPPFLAGS += -std=gnu23 -D NONMATCHING -D PORTABLE -D MODERN -D $(TARGET_PLATFORM) -D $(TILE_RENDERER) -D UBFIX $(CPPFLAGS64) $(PLATFORM_INCLUDES) -I$(SDL_DIR)/include -L$(SDL_DIR)/lib
 MODERNCC := $(PREFIX)gcc
 PATH_MODERNCC := PATH="$(PATH)" $(MODERNCC)
 CPP := $(PREFIX)cpp -m$(BIT_WIDTH)
 CC1 	:= $(shell $(PREFIX)gcc --print-prog-name=cc1) -quiet
 CC1PLUS = $(shell $(PATH_MODERNCC) --print-prog-name=cc1plus) -quiet
-override CFLAGS += $(OS_CFLAGS) $(PLATFORM_CFLAGS) -Werror=implicit-function-declaration -Wno-error=incompatible-pointer-types -Wno-error=int-conversion -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m$(BIT_WIDTH) -std=gnu23 $(LEADING_UNDERSCORE_FLAG) -fno-dce -fno-builtin -Wno-unused-function -DPORTABLE -DNONMATCHING -D UBFIX -DMODERN=$(MODERN) -D $(TARGET_PLATFORM) -D $(TILE_RENDERER)
+override CFLAGS += $(OS_CFLAGS) $(PLATFORM_CFLAGS) -Werror=implicit-function-declaration -Wno-error=incompatible-pointer-types -Wno-error=int-conversion -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m$(BIT_WIDTH) -std=gnu23 $(LEADING_UNDERSCORE_FLAG) -fno-dce -fno-builtin -Wno-unused-function -DPORTABLE -DNONMATCHING -D UBFIX -DMODERN=1 -D $(TARGET_PLATFORM) -D $(TILE_RENDERER) -g
 LIB := $(LIBPATH) -lgcc -lc
 else
 CC1              = $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
@@ -242,7 +242,7 @@ OBJ_DIR := $(OBJ_DIR)_public
 endif
 
 ifeq ($(PORTABLE),1)
-CPPCOMPILEFLAGS := $(OS_CFLAGS) $(PLATFORM_CFLAGS) -Werror=implicit-function-declaration -Wno-error=incompatible-pointer-types -Wno-error=int-conversion -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m$(BIT_WIDTH) -std=gnu++23 $(LEADING_UNDERSCORE_FLAG) -fno-dce -fno-builtin -Wno-unused-function -DPORTABLE -DNONMATCHING -DUBFIX -DMODERN=$(MODERN)
+CPPCOMPILEFLAGS := $(OS_CFLAGS) $(PLATFORM_CFLAGS) -Werror=implicit-function-declaration -Wno-error=incompatible-pointer-types -Wno-error=int-conversion -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m$(BIT_WIDTH) -std=gnu++23 $(LEADING_UNDERSCORE_FLAG) -fno-dce -fno-builtin -Wno-unused-function -DPORTABLE -DNONMATCHING -DUBFIX -DMODERN=1
 else
 CPPCOMPILEFLAGS := -Wall -Wextra -Werror -fno-exceptions -Wno-sign-compare -Wno-switch -Wno-missing-field-initializers -std=gnu++23
 endif
