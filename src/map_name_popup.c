@@ -297,7 +297,11 @@ void HideMapNamePopUpWindow(void)
 {
     if (FuncIsActiveTask(Task_MapNamePopUpWindow))
     {
-        ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
+        u8 windowId = GetMapNamePopUpWindowId();
+        if (windowId != WINDOW_NONE)
+        {
+            ClearStdWindowAndFrame(windowId, TRUE);
+        }
         RemoveMapNamePopUpWindow();
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
         DestroyTask(sPopupTaskId);
