@@ -941,11 +941,17 @@ u8 sub_81983EC(u8 windowId, u8 fontId, u8 left, u8 top, u8 numChoices, u8 initia
 void RedrawMenuCursor(u8 oldPos, u8 newPos)
 {
     u8 width, height;
+    u8 windowId = sMenu.windowId;
+
+    if (windowId == WINDOW_NONE)
+    {
+        return;
+    }
 
     width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
-    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
-    AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
+    FillWindowPixelRect(windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
+    AddTextPrinterParameterized(windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
 }
 
 u8 Menu_MoveCursor(s8 cursorDelta)

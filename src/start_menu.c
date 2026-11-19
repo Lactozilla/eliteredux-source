@@ -564,18 +564,24 @@ static void RemoveExtraStartMenuWindows(void)
 
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 {
+    u8 windowId = GetStartMenuWindowId();
     s8 index = *pIndex;
+
+    if (windowId == WINDOW_NONE)
+    {
+        return TRUE;
+    }
 
     do
     {
         if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenuPlayerNameCallback)
         {
-            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[sCurrentStartMenuActions[index]].text, 8, (index << 4) + 9);
+            PrintPlayerNameOnWindow(windowId, sStartMenuItems[sCurrentStartMenuActions[index]].text, 8, (index << 4) + 9);
         }
         else
         {
             StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
-            AddTextPrinterParameterized(GetStartMenuWindowId(), 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, 1, gStringVar4, 8, (index << 4) + 9, 0xFF, NULL);
         }
 
         index++;
@@ -1171,7 +1177,12 @@ static bool8 SaveErrorTimer(void)
 
 static u8 SaveConfirmSaveCallback(void)
 {
-    ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
+    u8 windowId = GetStartMenuWindowId();
+    if (windowId != WINDOW_NONE)
+    {
+        ClearStdWindowAndFrame(windowId, FALSE);
+    }
+
     RemoveStartMenuWindow();
     ShowSaveInfoWindow();
 
